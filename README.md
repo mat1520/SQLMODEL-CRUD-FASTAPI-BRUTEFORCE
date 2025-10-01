@@ -93,16 +93,7 @@ username="ARIEL"
 max_length="8"                   
 
 
-## Medidas de Mitigación Recomendadas
-
-1. **Rate Limiting:** Limitar intentos de login por IP/usuario
-2. **Contraseñas Fuertes:** Mínimo 12 caracteres, mixtos
-3. **Hashing:** Nunca almacenar contraseñas en texto plano (usar bcrypt, argon2)
-4. **2FA:** Autenticación de dos factores
-5. **Bloqueo Temporal:** Bloquear cuenta tras X intentos fallidos
-6. **Monitoreo:** Detectar patrones de ataque en logs
-
-## Resultados Esperados
+## Resultados
 
 Para contraseñas cortas:
 - **3 caracteres:** 
@@ -135,12 +126,10 @@ Longitud 3...
 Longitud 4...
 Longitud 5...
 Contraseña: 12345
-Intentos: 1777705369
-Tiempo: 172.48s (2.87 minutos)
+Intentos: 1797705369
+Tiempo: 172.48s (8.87 minutos)
 
 ## Análisis de Recursos Consumidos
-
-### Recursos Computacionales Medidos
 
 Durante la ejecución del ataque se consumen:
 
