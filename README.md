@@ -126,7 +126,7 @@ Contraseña: 12av
 Intentos: 19968952
 Tiempo: 1.93s
 
-- **5+ caracteres:** Horas/días
+- **5+ caracteres:** 
 Bienvenido :)
 Ingresa la contraseña a atacar que deseas para atacar: 12345
 Longitud 1...
@@ -134,5 +134,26 @@ Longitud 2...
 Longitud 3...
 Longitud 4...
 Longitud 5...
+Contraseña: 12345
+Intentos: 1777705369
+Tiempo: 172.48s (2.87 minutos)
+
+## Análisis de Recursos Consumidos
+
+### Recursos Computacionales Medidos
+
+Durante la ejecución del ataque se consumen:
+
+**CPU:**
+- Uso intensivo de 1 core al 100%
+
+
+**Memoria RAM:**
+- Consumo mínimo: ~50-100 MB
+
+
+## Efectos del Ataque
+
+## Autor
 
 [@mat1520](https://github.com/mat1520)
