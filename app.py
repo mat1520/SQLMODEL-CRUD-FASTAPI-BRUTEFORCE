@@ -8,6 +8,7 @@ class Hero(SQLModel, table=True):
     password: str
 
 db = []
+id_counter = 1
 app = FastAPI()
 
 @app.get("/")
