@@ -8,19 +8,15 @@ class Hero(SQLModel, table=True):
     password: str
 
 db = []
-id_counter = 1
 app = FastAPI()
 
 @app.get("/")
 def read_root():
-    return {"Actividad: CRUD de Usuarios + Prueba controlada de fuerza bruta contra tu propia API"}
+    return {"Actividad": "CRUD de Usuarios + Prueba controlada de fuerza bruta contra tu propia API"}
 
 @app.post("/users")
 def crear_usuario(username: str, password: str):
-    global id_counter
-    id = id_counter
-    id_counter += 1
-    user = Hero(id=id, username=username, password=password)
+    user = Hero(id=len(db) + 1, username=username, password=password)
     db.append(user)
     return user
 
@@ -29,33 +25,31 @@ def get_users():
     return {"users": db}
 
 @app.get("/users/{user_id}")
-def get_user(user_id: int):
-    user = next((user for user in db if user.id == user_id), None)
-    if user:
-        return user
-    return {"Usuario no encontrado"}
+def get_user_by_id(user_id: int):
+    for user in db:
+        if user.id == user_id:
+            return user
+    return {"error": "Usuario no encontrado"}
 
 @app.put("/users/{user_id}")
-def update_user(user_id: int, username: str | None = None):
-    user = next((user for user in db if user.id == user_id), None)
-    if user:
-        if username:
+def update_user(user_id: int, username: str):
+    for user in db:
+        if user.id == user_id:
             user.username = username
-        return user
-    return {"Usuario no encontrado"}
+            return user
+    return {"error": "Usuario no encontrado"}
 
 @app.delete("/users/{user_id}")
 def delete_user(user_id: int, username: str):
-    global db
-    user = next((user for user in db if user.id == user_id and user.username == username), None)
-    if user:
-        db = [u for u in db if u.id != user_id]
-        return {"Usuario eliminado": user}
-    return {"Usuario no encontrado o credenciales incorrectas"}
+    for i, user in enumerate(db):
+        if user.id == user_id and user.username == username:
+            db.pop(i)
+            return {"success": "Usuario eliminado"}
+    return {"error": "Usuario no encontrado"}
 
 @app.post("/login")
-async def login(username: str, password: str):
-    user = next((user for user in db if user.username == username and user.password == password), None)
-    if user:
-        return {"message": "Login successful"}
+def login(username: str, password: str):
+    for user in db:
+        if user.username == username and user.password == password:
+            return {"message": "Login successful"}
     return {"message": "Invalid credentials"}
